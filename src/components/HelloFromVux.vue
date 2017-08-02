@@ -2,7 +2,7 @@
   <div>
     <div class="vux-demo">
       <img class="logo" src="../assets/vux_logo.png">
-      <h1> </h1>
+      <h1 @click="showActionSheet">Hello</h1>
     </div>
     <group title="cell demo">
       <cell title="VUX" value="cool" is-link></cell>
@@ -11,12 +11,13 @@
 </template>
 
 <script>
-import { Group, Cell } from 'vux'
+import { Group, Cell, Actionsheet } from 'vux'
 
 export default {
   components: {
     Group,
-    Cell
+    Cell,
+    Actionsheet
   },
   data () {
     return {
@@ -25,6 +26,14 @@ export default {
       // preserves its current state and we are modifying
       // its initial state.
       msg: 'Hello World!'
+    }
+  },
+  methods: {
+    showActionSheet(){
+        console.log(123);
+      this.$vux.loading.show({
+        text: 'hello'
+      })
     }
   }
 }
