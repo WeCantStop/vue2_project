@@ -3,7 +3,7 @@
     <x-header :left-options="{showBack: false}">
       <img class="logo" src="../assets/logo-s.png" alt="">
     </x-header>
-    <h1>{{ msg }}</h1>
+    <swiper :list="demo01_list" v-model="demo01_index" loop auto @on-index-change=""></swiper>
     <button @click="gotoVux">GoTo Vux</button>
     <tabbar>
       <tabbar-item>
@@ -31,18 +31,38 @@
 </template>
 
 <script>
-  import { XHeader, Tabbar, TabbarItem, Swiper, SwiperItem} from 'vux'
+  import { XHeader, Tabbar, TabbarItem, Swiper } from 'vux'
+
+  const baseList = [{
+    url: 'javascript:',
+    img: 'http://oss.yaok.com/headimg/2017-02-24/dbac3c20-63ad-466f-938d-d259f3c55e21.jpg?x-oss-process=image/resize,w_768'
+  }, {
+    url: 'javascript:',
+    img: 'http://oss.yaok.com/headimg/2017-02-28/207ffc4d-b2f3-4644-a009-ec9d0ed83cb1.jpg?x-oss-process=image/resize,w_768'
+  }, {
+    url: 'javascript:',
+    img: 'http://oss.yaok.com/headimg/2017-03-30/34330009-f037-42d1-a944-2b61749a610d.jpg?x-oss-process=image/resize,w_768'
+  },{
+    url: 'javascript:',
+    img: 'http://img.yaok.com/user/2017-08-04/2017080414225903403329175940.jpg?x-oss-process=image/resize,w_768'
+  },{
+    url: 'javascript:',
+    img: 'http://img.yaok.com/user/2017-08-04/2017080414194313420402624884.jpg?x-oss-process=image/resize,w_768'
+  }];
+
 export default {
   name: 'hello',
   data () {
     return {
-      msg: 'Welcome back'
+      demo01_list: baseList,
+      demo01_index: 0
     }
   },
   components: {
     XHeader,
     Tabbar,
-    TabbarItem
+    TabbarItem,
+    Swiper
   },
   methods: {
     gotoVux(){
@@ -81,5 +101,4 @@ export default {
     box-shadow: 2px 0 12px -6px #aaa;
     border-bottom: 1px solid #eee;
   }
-
 </style>
