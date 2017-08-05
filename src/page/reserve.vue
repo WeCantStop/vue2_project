@@ -1,20 +1,22 @@
 <template>
-  <div class="hello">
-    <x-header :left-options="{showBack: false}">
-      <img class="logo" src="../assets/logo-s.png" alt="">
-    </x-header>
-    <swiper :list="demo01_list" v-model="demo01_index" loop auto @on-index-change=""></swiper>
-    <button @click="gotoVux">GoTo Vux</button>
+  <div class="reserve">
+    <div class="vux-demo">
+      <img class="logo" src="../assets/vux_logo.png">
+      <h1 @click="showActionSheet">Hello</h1>
+    </div>
+    <group title="cell demo">
+      <cell title="VUX" value="cool" is-link></cell>
+    </group>
     <tabbar>
-      <tabbar-item>
+      <tabbar-item link="/">
         <img slot="icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAYAAACohjseAAAAAXNSR0IArs4c6QAABIpJREFUaAXtWk9IVEEYn2/LSomIiAJDMLU6GWkQ/TtoGQSdDDL04iYdulqXDhF76FBQdO0Q/iFIMqhLQaCmh0oI0sgumlYQGkVERGilven7vX2zvre7rr6debgub2D3zXvzfd/8fvPNm/m+4QkRlnAEcnoEKB26A60vCr/9mD4qhagUUq5NJ5Mzz4j+MImRzRuL+gZvHpxJxpVCcNfZ3t2zs+K+EHJnsnBu39NYQYE4NXq77o0bp4cgPPfl+/RrkCNBw+zBJxGSf90KuVa3JK1hEselkFVC0NjWTUV73J5c7QaMaanIlWxftW8gVjvnbs/Vek2s//KnD/9egmScg3iksEZUBVf7nYtfn6wUcsANrJhtqCsOqKN4CKoFJdenZRy69z+BOWlR9BL06uTFXUhwpbsx9GDowRwfgbyfop5IJghnSClpR8vTKkuIXWTJYvQhIzTFIzv6ru3IMBHx3hxcCYxg+bnnW+TM74sV0b4GDqG2gUKCiSUFExbcNlnW3NdNheuuTtw69DUImoFM0fLm3gtiZmZCCKvVJkf0kQPiLorQDfvHdcHP4sStVsjaOgEwNOrBmmj/uk9yro2BNwIrZyQPmdCV8fajQ+mwV5zpq5aWvMTy9dx+vby5Z28JrW4Z6Kj9nU4+m2dGCcbJiUb21k+ejk0TnXWPM4FyiJ8sa+45wTp3WaeRbUClKZOenzZjUxRTDABtciQOv+88lpGcGyRkJes4A9NocroaIYgFhQHHABqee99xbAR1PwU60HV0Yo5NPybSyhohiNWS36P1eOf8eC4ZEXRhA7ZgM7k9m3ttgtjniKzT6BwLSjYg3DrKBgnZANvutmzq2gQrov3VUopiLPsLrZZ+gNk2nC0Etv3oppPVJigj8dM3knIwXQfZPFO2lO1sbCgdbYIq/BIcfimj2lfHVsK2hkFtghp9L6pK/CIuKrSIgDZBBM52H04gvUh/S2uWwo5dLaLPS1NYWEqbIFk0BvO8lh5YuBt/Ley2/dBgcKP+NFOltQmOd9QO8VSa4iPHUsSWqV34e2LbYFu8H04infKnnSqtTRD5nJSRezCNwDm1C39PlA0pqNtErqhNEPCLCuQ1HvFfyAoQOPujNC8NXdiALeSI8y3Z14wQfHu77gtDiAEGsoKyaE8l6n4KdKDr6MRMJcBGCAIUp0Y3GGAXLxAb+BDimR9P2ukS69i6bAO2/AxOJlljBNEJklVFkm8fcdrzINPCgzbIQFaRgw3YMlWMJrxOJt7EoF8xwBjeJ1406suivR/t8Mu1Z2JbsSyrFETwzkEenuNzDqPFKEGFDEA5n7sjOOVBpsHLbCl7qFTwYVOicISO7cVegQM8dAqEIEg4i8R5JnfBzjg4KFexJaIfBAjj7dhDV+ixofKUQwBTFj9PoU7PbSA3RheZQBBqGg0Jag7gsquHHlx2F2gCCD2oOYDLru71IH/YBkT4PGrZkfkEkMDscFDqHoIcKNtH7nw9zp9HBRblqM5NXYEVmGFPcVC2+X6+5OPHeB6CoJrXn1MqX+bTB7GKU3gNRyBHR+A/KFjbvWAqMXEAAAAASUVORK5CYII=">
         <span slot="label">首页</span>
       </tabbar-item>
-      <tabbar-item show-dot>
+      <tabbar-item link="/reserve" selected>
         <img slot="icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAYAAACohjseAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NEQ1ODE5NEE5RDgxMTFFNTlBNTVGQTA1RTcxRjc4QUMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NEQ1ODE5NEI5RDgxMTFFNTlBNTVGQTA1RTcxRjc4QUMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0NDQxRjA0NTlENjkxMUU1OUE1NUZBMDVFNzFGNzhBQyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0NDQxRjA0NjlENjkxMUU1OUE1NUZBMDVFNzFGNzhBQyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgfnkEMAAAgFSURBVHja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">
         <span slot="label">预约</span>
       </tabbar-item>
-      <tabbar-item selected link="/component/demo">
+      <tabbar-item>
         <img slot="icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAYAAACohjseAAAAAXNSR0IArs4c6QAAAWNJREFUaAXtmssNwjAMhpOKMTjwkNgF2IMpgAMwBXsAuyDxODAHISlVTzGylMS41Z9T5Dqx/X9GTVGMwYACqhWwVHbP7Wz+du+jcW5I+aiwW/uqbLUa7a6XWD5VzBhsnSguJOoB1LmGeWQMIravqSE3OdxIyuRawQf39dT96jKSoGCORUOhwKLyCmwOggIiFw0BgkXlFdgcBAVELhoCBIvKK7A5fRZlBn9spifnzILpHnWz1pzH+9sy+jDR2PsWTSZYSvlEcO3y3hNEgS3rjk5AsKPg2rRBsJWio5Pk92COkwylXY4TjuoWdf5fT6p4rj2ZIE4yXKkL+alu0Rw1o8AcKv5zDxD8p/o5YveeYPJ7ECeZhD7DSYYhXu9/gyiQ0QWqXUBQNR5GciDIEEm1CwiqxsNIDgQZIql2ob8m/D3McIuvvs2nugSfXMiVGGSLhkumvxYS+8mbmwux8oEREQpkUeADV8xGaoJtaEsAAAAASUVORK5CYII=">
         <span slot="label">活动</span>
       </tabbar-item>
@@ -31,74 +33,41 @@
 </template>
 
 <script>
-  import { XHeader, Tabbar, TabbarItem, Swiper } from 'vux'
+  import { Group, Cell, Tabbar, TabbarItem } from 'vux'
 
-  const baseList = [{
-    url: 'javascript:',
-    img: 'http://oss.yaok.com/headimg/2017-02-24/dbac3c20-63ad-466f-938d-d259f3c55e21.jpg?x-oss-process=image/resize,w_768'
-  }, {
-    url: 'javascript:',
-    img: 'http://oss.yaok.com/headimg/2017-02-28/207ffc4d-b2f3-4644-a009-ec9d0ed83cb1.jpg?x-oss-process=image/resize,w_768'
-  }, {
-    url: 'javascript:',
-    img: 'http://oss.yaok.com/headimg/2017-03-30/34330009-f037-42d1-a944-2b61749a610d.jpg?x-oss-process=image/resize,w_768'
-  },{
-    url: 'javascript:',
-    img: 'http://img.yaok.com/user/2017-08-04/2017080414225903403329175940.jpg?x-oss-process=image/resize,w_768'
-  },{
-    url: 'javascript:',
-    img: 'http://img.yaok.com/user/2017-08-04/2017080414194313420402624884.jpg?x-oss-process=image/resize,w_768'
-  }];
-
-export default {
-  name: 'hello',
-  data () {
-    return {
-      demo01_list: baseList,
-      demo01_index: 0
-    }
-  },
-  components: {
-    XHeader,
-    Tabbar,
-    TabbarItem,
-    Swiper
-  },
-  methods: {
-    gotoVux(){
-      this.$router.push({ name: 'home', query:{name: 'will', age: '18'}});
+  export default {
+    components: {
+      Group,
+      Cell,
+      Tabbar,
+      TabbarItem
+    },
+    data () {
+      return {
+        // note: changing this line won't causes changes
+        // with hot-reload because the reloaded component
+        // preserves its current state and we are modifying
+        // its initial state.
+        msg: 'Hello World!'
+      }
+    },
+    methods: {
+      showActionSheet(){
+        console.log(123);
+        this.$vux.loading.show({
+          text: 'hello'
+        })
+      }
     }
   }
-}
 </script>
-  <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  h1, h2 {
-    font-weight: normal;
-  }
 
-  ul {
-    list-style-type: none;
-    padding: 0;
+<style>
+  .vux-demo {
+    text-align: center;
   }
-
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
-
-  a {
-    color: #42b983;
-  }
-
   .logo {
-    max-height: 140%;
-    margin-top: -8px;
-  }
-
-  .vux-header {
-    background-color: #fff;
-    box-shadow: 2px 0 12px -6px #aaa;
-    border-bottom: 1px solid #eee;
+    width: 100px;
+    height: 100px
   }
 </style>

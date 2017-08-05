@@ -4,8 +4,9 @@ import Router from 'vue-router'
 Vue.use(Router);
 
 const routes = [
-  {path: "/", component: resolve => require(['@/components/Hello'], resolve),  name: "Hello"},
-  {path: "/home", component: resolve => require(['@/components/HelloFromVux'], resolve),  name: "home"}
+  {path: "/", redirect: {name: "index"}},
+  {path: "/index", component: resolve => require(['@/page/index'], resolve),  name: "index"},
+  {path: "/reserve", component: resolve => require(['@/page/reserve'], resolve),  name: "reserve"}
 ];
 
 export default new Router({
