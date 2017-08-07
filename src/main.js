@@ -4,7 +4,7 @@ import Vue from 'vue'
 import router from './router'
 import FastClick from 'fastclick'
 import App from './App'
-import store from '@/vuex'
+import store from '@/store'
 
 FastClick.attach(document.body);
 
