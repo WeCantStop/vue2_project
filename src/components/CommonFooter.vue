@@ -30,7 +30,6 @@
     },
     methods: {
       changeState(name){
-        console.log(name);
         let target = '';
         switch (name){
           case '首页':

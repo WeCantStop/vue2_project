@@ -1,15 +1,16 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import mutations from './mutations'
+import computerModule from './computer'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
-export default new Vuex.Store ({
+export default new Vuex.Store({
   state: {
     count: 1
   },
   mutations,
-  action: {
-
+  modules: {
+    computerModule
   }
 })

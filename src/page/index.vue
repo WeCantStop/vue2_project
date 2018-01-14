@@ -58,8 +58,6 @@
       }
     },
     created(){
-      console.log(this.$store.state.count);
-
       //promise 方法的使用
       //避免回调地狱
 
