@@ -7,51 +7,63 @@
     <group title="cell demo">
       <cell title="VUX" value="cool" is-link></cell>
     </group>
-
-    <group title="cell demo">
-      <cell :title="num" value="cool" is-link></cell>
-    </group>
-
-    <button @click="addNum(8)">+8</button>
+    <div class="addEvent-container">
+      <input ref="eventInput" type="text" v-model="inputEvent" @keyup.enter="addEvent">
+      <button @click="addEvent">添加</button>
+    </div>
+    <ul>
+      <li v-for="(event, index) in todoList" :key="index">
+        <span>{{index+1}}、</span>
+        <span>{{event.text}}</span>
+        <span class="remove-btn" @click="removeEvent(index)">删除</span>
+      </li>
+    </ul>
 
     <common-footer></common-footer>
   </div>
 </template>
 
 <script>
-  import { Group, Cell } from 'vux'
+  import { Group, Cell, Alert, AlertModule } from 'vux'
   import CommonFooter from '@/components/CommonFooter'
   import { mapState, mapActions } from 'vuex'
-
 
   export default {
     name: 'reserve',
     components: {
       Group,
       Cell,
-      CommonFooter
+      CommonFooter,
+      Alert
     },
     data () {
       return {
-        // note: changing this line won't causes changes
-        // with hot-reload because the reloaded component
-        // preserves its current state and we are modifying
-        // its initial state.
-        msg: 'Hello World!'
+        msg: 'Hello World!',
+        inputEvent: ''
       }
     },
     methods: {
-      ...mapActions('computerModule', [
-        'addNum',
-        'decreaseNum'
-      ])
-
+    
+      addEvent() {
+        if (!this.inputEvent) {
+          AlertModule.show({
+            title: 'Trip',
+            content: '请输入内容'
+          });     
+          return;
+        }
+        this.$store.commit('todoListModule/ADD_EVENT', {text: this.inputEvent});
+        this.inputEvent = '';
+      },
+      removeEvent(id) {
+        this.$store.commit('todoListModule/REMOVE_EVENT', id);
+      }
     },
     created(){},
     computed: {
-      ...mapState('computerModule', {
-        num: 'testNum'
-      })
+      ...mapState('todoListModule', [
+        'todoList'
+      ])
     }
   }
 </script>
@@ -69,5 +81,14 @@
     min-width: 80px;
     border: 1px solid #000;
     text-align: center;
+  }
+  .addEvent-container input {
+    border: 1px solid #000;
+    padding-left: 10px;
+  }
+  .remove-btn {
+    display: inline-block;
+    float: right;
+    padding-right: 20px;
   }
 </style>

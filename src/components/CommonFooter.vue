@@ -50,7 +50,6 @@
         }
 
         this.$router.push({name: target});
-        this.$store.commit('INCREASE_COUNT');
       }
     }
   }

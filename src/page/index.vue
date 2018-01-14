@@ -52,10 +52,6 @@
       CommonFooter
     },
     methods: {
-      changeState(){
-        this.$store.commit('INCREASE_COUNT');
-        this.$router.push({name: 'reserve', query: {name: 'will',age: '20'}})
-      }
     },
     created(){
       //promise 方法的使用

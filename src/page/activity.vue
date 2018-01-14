@@ -6,6 +6,13 @@
     <button @click="addNum(2)">+2</button>
     <button @click="decreaseNum(2)">-2</button>
     <button @click="decreaseNum(4)">-4</button>
+
+    <ul>
+      <li v-for="(event, index) in todoList" :key="index">
+        <span>{{event.id}}、</span>
+        <span>{{event.text}}</span>
+      </li>
+    </ul>
     <common-footer></common-footer>
   </div>
 </template>
@@ -35,6 +42,10 @@
     computed: {
       ...mapState('computerModule', {
         num: 'testNum'
+      }),
+
+      ...mapState('todoListModule', {
+        todoList: 'todoList'
       })
     }
   }
