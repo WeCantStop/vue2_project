@@ -8,6 +8,9 @@ export default {
     },
     [types.REMOVE_EVENT] (state, id) {
         state.todoList.splice(id, 1);
+    },
+    [types.REMOVE_ALL_EVENT] (state) {
+        state.todoList = [];
     }
 }
 

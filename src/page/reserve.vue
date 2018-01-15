@@ -10,6 +10,7 @@
     <div class="addEvent-container">
       <input ref="eventInput" type="text" v-model="inputEvent" @keyup.enter="addEvent">
       <button @click="addEvent">添加</button>
+      <button @click="removeAllEvent">清空</button>
     </div>
     <ul>
       <li v-for="(event, index) in todoList" :key="index">
@@ -57,6 +58,9 @@
       },
       removeEvent(id) {
         this.$store.commit('todoListModule/REMOVE_EVENT', id);
+      },
+      removeAllEvent () {
+        this.$store.commit('todoListModule/REMOVE_ALL_EVENT');
       }
     },
     created(){},
